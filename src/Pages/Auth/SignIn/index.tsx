@@ -15,7 +15,7 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    if (username == "" || password == "") {
+    if (username === "" || password === "") {
       toast.error('Please fill the form!', {
         position: "top-right",
         autoClose: 5000,
