@@ -1,4 +1,3 @@
-import React, { useTransition } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { FaUserCircle } from "react-icons/fa";
@@ -65,8 +64,8 @@ const Settings = () => {
                     aria-label="Default select example"
                   >
                     {/* <option selected>Open this select menu</option> */}
-                    <option selected={isLang == "en"} value="en">English</option>
-                    <option selected={isLang == "uz"} value="uz">Uzbek</option>
+                    <option selected={isLang === "en"} value="en">English</option>
+                    <option selected={isLang === "uz"} value="uz">Uzbek</option>
                   </select>
                 </div>
               </div>
