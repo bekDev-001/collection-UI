@@ -1,25 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Suspense} from "react";
+import { Routes, Route, useRoutes } from "react-router-dom";
+import Home from "./Pages/Home/Home";
+import Register from "./Pages/Auth/SignUp";
+import Login from "./Pages/Auth/SignIn";
+import ViewMain from "./Pages/ViewMain";
+import Settings from "./Pages/Settings";
+import AddCollection from "./Pages/AddCollection";
+import ViewCollection from "./Pages/ViewCollection";
+import ViewAllCollection from "./Pages/ViewAllCollection";
+import ViewItem from "./Pages/ViewItem";
+import AddItem from "./Pages/AddItem";
+
+import {routes} from "./router/routes"
+
 
 function App() {
+  const content = useRoutes(routes)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <section>
+      {content}
+    </section>
+    // <Routes>
+    //   <Route index element={<Home />} />
+    //   <Route path="home" element={<Home />}>
+    //    <Route path="main" element={<ViewMain />} />
+    //    <Route path="addCollection" element={<AddCollection />} />
+    //    <Route path="addItem" element={<AddItem />} />
+    //    <Route path="viewCollection" element={<ViewCollection />} />
+    //    <Route path="viewAllCollection" element={<ViewAllCollection />} />
+    //    <Route path="viewItem" element={<ViewItem />} />
+    //    <Route path="settings" element={<Settings />} />
+    //   </Route>
+    //   <Route path="auth">
+    //     <Route path="signUp" element={<Register />} />
+    //     <Route path="signIn" element={<Login />} />
+    //   </Route>
+    //   <Route path="*" element={<Home />} />
+    // </Routes>
   );
 }
 

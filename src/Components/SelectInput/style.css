@@ -1,0 +1,40 @@
+.container-select-input .select-input-label {
+  /* color: var(--primary-color); */
+  padding-bottom: 0.5rem;
+}
+
+.container-select-input .css-1s2u09g-control {
+  border: 1px solid var(--primary-color) !important;
+}
+
+.container-select-input .css-14el2xx-placeholder {
+  color: var(--primary-color) !important;
+  font-size: 14px !important;
+  padding: 6.6px 10px !important;
+}
+
+.container-select-input .css-qc6sy-singleValue {
+  font-size: 14px !important;
+}
+.container-select-input .css-1pahdxg-control {
+  border: 1px solid var(--primary-color) !important;
+  box-shadow: none !important;
+}
+.container-select-input .css-1pahdxg-control:hover {
+  border: 1px solid var(--primary-color) !important;
+}
+
+.container-select-input .css-tlfecz-indicatorContainer {
+  color: var(--primary-color) !important;
+}
+
+.css-6j8wv5-Input {
+  padding: 3px 10px !important;
+}
+.select-input-class .css-1s2u09g-control {
+  border: 1px solid red !important;
+}
+
+.dark .css-1s2u09g-control {
+  background-color: rgb(51 65 85 / var(--tw-bg-opacity)) !important;
+}
