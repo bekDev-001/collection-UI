@@ -43,5 +43,37 @@ export default {
       // params: {
       //   id: localStorage.getItem("userId")
       // }
+    }),
+    // edit collection
+    editCollection: ( data: any, id: any) =>
+    service.patch(`/api/collection/edit/${id}`, data,  {
+      headers: {
+        "Content-Type": "multipart/form-data",
+         Authorization: `Bearer ${localStorage.getItem("token")}`,
+      }
+    }),
+    // edit item
+    editItem: ( data: any, id: any) =>
+    service.patch(`/api/item/edit/${id}`, data,  {
+      headers: {
+        "Content-Type": "multipart/form-data",
+         Authorization: `Bearer ${localStorage.getItem("token")}`,
+      }
+    }),
+    // del collection
+    delCollection: (id: any) =>
+    service.delete(`/api/collection/delete/one/${id}`,  {
+      headers: {
+        "Content-Type": "multipart/form-data",
+         Authorization: `Bearer ${localStorage.getItem("token")}`,
+      }
+    }),
+    // del item
+    delItem: (id: any) =>
+    service.delete(`/api/item/delete/one/${id}`,  {
+      headers: {
+        "Content-Type": "multipart/form-data",
+         Authorization: `Bearer ${localStorage.getItem("token")}`,
+      }
     })
 };

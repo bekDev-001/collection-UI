@@ -29,11 +29,15 @@ const SignUp = () => {
     } else if (username && password) {
       authService.userLogin(username, password)
         .then((res) => {
+          console.log(res);
+          
           if (res.status === 200 || res.status === 201) {
             localStorage.setItem("token", res.data.token)
             localStorage.setItem("userId", res.data.user._id)
             localStorage.setItem("username", res.data.user.username)
             localStorage.setItem("email", res.data.user.email)
+            // status
+            localStorage.setItem("status", res.data.user.status)
             
             toast.success('Successfully logged in!', {
               position: "top-right",
@@ -144,24 +148,24 @@ const SignUp = () => {
             </div>
             <div className="flex items-center justify-around mt-6">
               <div className="w-14 h-14 text-center rounded-full bg-blue-500 text-white saturate-200 transition-all hover:bg-blue-600">
-                <a href="#" className="mt-4 flex justify-center">
+                <div className="mt-4 flex justify-center">
                   <FaFacebookF className="text-2xl" />
-                </a>
+                </div>
               </div>
               <div className="w-14 h-14 text-center rounded-full bg-red-500 text-white saturate-100 transition-all hover:bg-red-600">
-                <a href="#" className="flex justify-center items-center mt-4">
+                <div className="flex justify-center items-center mt-4">
                   <AiOutlineGoogle className="text-3xl" />
-                </a>
+                </div>
               </div>
               <div className="w-14 h-14 text-center rounded-full bg-indigo-500 text-white saturate-100 transition-all hover:bg-indigo-600">
-                <a href="#" className="flex justify-center items-center mt-4">
+                <div className="flex justify-center items-center mt-4">
                   <BsTwitch className="text-2xl" />
-                </a>
+                </div>
               </div>
               <div className="w-14 h-14 text-center rounded-full bg-green-500 text-white saturate-100 transition-all hover:bg-green-600">
-                <a href="#" className="flex justify-center mt-4">
+                <div className="flex justify-center mt-4">
                   <BsSnapchat className="text-2xl" />
-                </a>
+                </div>
               </div>
             </div>
             <div className="flex items-center my-6">

@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 const Settings = () => {
   const username = localStorage.getItem("username");
   const userId = localStorage.getItem("userId");
+  const status = localStorage.getItem("status");
   const email = localStorage.getItem("email");
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,10 +31,10 @@ const Settings = () => {
   return (
     <div className="bg-gray-100 min-h-screen dark:bg-black">
       <form className="p-6" action="POST">
-        <div className="font-bold main-text-color xl:text-2xl md:text-xl py-4 dark:text-white">
+        <div className="font-bold main-text-color xl:text-2xl md:text-2xl text-xl py-4 dark:text-white">
           {t("settings_title")}
         </div>
-        <div className="bg-white dark:bg-dark-mode-card flex gap-10 box-shadow-wrapper rounded p-6">
+        <div className="bg-white dark:bg-dark-mode-card flex flex-col md:flex-row gap-10 box-shadow-wrapper rounded p-6">
           <div className="flex flex-col gap-10 w-96">
             <div className="text-2xl font-medium font-body text-gray-900 pb-4 dark:text-slate-300">
               {t("settings_title1")}
@@ -95,7 +96,7 @@ const Settings = () => {
               {t("settings_title2")}
             </div>
             <div className="flex gap-7 justify-center items-center">
-              <div className="text-7xl text-gray-500">
+              <div className="text-5xl md:text-7xl text-gray-500">
                 <FaUserCircle />
               </div>
               {userId ? 
@@ -115,6 +116,12 @@ const Settings = () => {
             {userId ? 
             <div className="w-20 pt-5">
               <SubmitButton title={t("settings_logout")} onClick={handleLogOut} />
+            </div>
+            : ""
+          }
+            {status ? 
+            <div className="pt-5">
+              <button onClick={() => navigate("/admin")} type="button" className="inline-block px-6 py-2.5 bg-blue-400 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-500 hover:shadow-lg focus:bg-blue-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-600 active:shadow-lg transition duration-150 ease-in-out">Admin Page</button>
             </div>
             : ""
           }

@@ -49,15 +49,15 @@ const ViewMain = () => {
 
   
   return (
-    <div className="p-20">
+    <div className="p-10 md:p-20">
       <div className="w-full dark:bg-black">
         <div className="flex justify-between items-center pb-7">
-          <div className="text-4xl font-bold dark:text-white">
+          <div className="text-xl xl:text-4xl lg:text-4xl md:text-3xl font-bold dark:text-white">
             {t("home_largest_collection")}
           </div>
           <button
             onClick={() => navigate("/viewAllCollection")}
-            className="flex items-center bg-blue-500 text-white border border-blue-500 rounded px-3 py-1 hover:bg-blue-400 hover:border-blue-400"
+            className="flex items-center text-lg md:px-3 md:text-base bg-blue-500 text-white border border-blue-500 rounded px-2 py-1 hover:bg-blue-400 hover:border-blue-400"
           >
             {t("home_card_viewAll")}
             <span className="text-2xl">
@@ -77,6 +77,9 @@ const ViewMain = () => {
           navigation={true}
           modules={[Pagination, Navigation]}
           breakpoints={{
+            1920:{
+               slidesPerView: 5,
+            },
             1024:{
                slidesPerView: 4,
             },
@@ -85,7 +88,6 @@ const ViewMain = () => {
             },
             720:{
                slidesPerView: 2,
-               centeredSlides: true,
             },
             100:{
                slidesPerView: 1,
@@ -154,7 +156,7 @@ const ViewMain = () => {
       <div className="pt-32">
         <div className="w-full">
           <div className="flex pb-7">
-            <div className="text-4xl font-bold dark:text-white">{t("home_recent_items")}</div>
+            <div className="text-xl xl:text-4xl lg:text-4xl md:text-3xl font-bold dark:text-white">{t("home_recent_items")}</div>
           </div>
           <Swiper
             slidesPerView={4}
@@ -168,6 +170,9 @@ const ViewMain = () => {
             navigation={true}
             modules={[Pagination, Navigation]}
             breakpoints={{
+            1920:{
+               slidesPerView: 5,
+            },
             1024:{
                slidesPerView: 4,
             },

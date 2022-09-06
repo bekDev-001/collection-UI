@@ -8,6 +8,7 @@ import ViewAllCollection from "../Pages/ViewAllCollection";
 import ViewItem from "../Pages/ViewItem";
 import Settings from "../Pages/Settings";
 import UserOwnCollectons from "../Pages/UserOwnCollectons";
+import AdminPanel from "../Pages/AdminPanel";
 
 import SignIn from "../Pages/Auth/SignIn";
 import SignUp from "../Pages/Auth/SignUp";
@@ -24,6 +25,7 @@ export const routes = [
       { path: "/viewItem", element: <ViewItem /> },
       { path: "/settings", element: <Settings /> },
       { path: "/userOwnCollections", element: <UserOwnCollectons /> },
+      { path: "/admin", element: <AdminPanel /> },
     ],
   },
   {
