@@ -7,4 +7,13 @@ export default {
   // login
   userLogin: ( username:string, password: string ) =>
     service.post("/api/user/signIn", { username, password }),
+  // get all user
+    // getAllItmes
+  getAllUsers: () => 
+    service.get("/api", {
+      headers: {
+        "Content-Type": "application/json",
+         Authorization: `Bearer ${localStorage.getItem("token")}`,
+      }
+    }), 
 };

@@ -26,9 +26,10 @@ const UserOwnCollections = () => {
   };
   return (
     <div className='p-6'>
-        <div className='text-black dark:text-white text-3xl inline-flex font-semibold pt-3 mb-5 border-b-2 border-b-blue-500'>{t("user_ownCollection_title")}</div>
-        <div className='grid grid-cols-4 gap-3'>
-            {userCollections.map((item:any, i: number) => (
+        <div className='text-black dark:text-white text-2xl md:text-3xl inline-flex font-semibold pt-3 mb-5 border-b-2 border-b-blue-500'>{t("user_ownCollection_title")}</div>
+        <div className='grid grid-cols-1 2xl:grid-cols-5 xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2  gap-3'>
+           {userCollections ? 
+           userCollections.map((item:any, i: number) => (
                 <div
                 key={i}
                 onClick={() => handleCollectionNavigate(item._id)}
@@ -53,7 +54,8 @@ const UserOwnCollections = () => {
                       </div>
                     </div>
                   </div>
-            ))}
+            )) : <div>NO collections yet</div>
+          }
         </div>
     </div>
   )

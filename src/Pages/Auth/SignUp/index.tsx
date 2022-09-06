@@ -30,7 +30,6 @@ const SignUp = () => {
     } else if (username && password && email) {
       authService.userRegistration(username, password, email)
         .then((res) => {
-          // console.log(res);
           if (res.status === 200 || res.status === 201) {
             localStorage.setItem("token", res.data.token)
             localStorage.setItem("userId", res.data.user._id)

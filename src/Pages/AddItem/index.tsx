@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useLocation} from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loadingMode } from "../../redux/reducers/loadingReducer";
 import ImageUploadInput from "../../Components/ImageUploadInput";
@@ -22,9 +22,28 @@ const AddItem = () => {
   const [collectionData, setCollectionData] = useState("");
 
   const dispatch = useDispatch();
+  const {state} = useLocation();
   const navigate = useNavigate();  
   const { t } = useTranslation();
 
+  console.log(state);
+
+    useEffect(() => {
+    if(state) {
+       collectionService.getOneItemId(state).then((res) => {
+          console.log("One item get:",res);
+          setTitle(res.data.item.itemTitle)
+          setTag(res.data.item.itemTag)
+          setDescripton(res.data.item.description)
+          setImageShow(res.data.item.itemImage)
+          setImage(res.data.item.itemImage)
+          setCollectionId(res.data.item.itemCollection._id)
+        }).catch((err) => {
+          console.log(err);
+        })
+   }
+  }, [])
+  
 
   const imageHandler = (event: any) => {
     if (event.target.files["0"]) {
@@ -43,12 +62,12 @@ const AddItem = () => {
     itemData.append("itemTag", tag);
     itemData.append("description", description);
     itemData.append("itemImage", image);
-    collectionService
-      .addItem(itemData, collectionId)
-      .then((res) => {
+    if(state) {
+      collectionService.editItem(itemData, state).then((res) => {
+        console.log(res);
         dispatch(loadingMode(false));
-        if (res.status === 200) {
-          toast.success(res?.data?.message, {
+           if (res.status === 200) {
+          toast.success("Edit successfully!", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -60,10 +79,8 @@ const AddItem = () => {
           // 
           navigate("/")
         }
-        console.log(res);
-      })
-      .catch((err) => {
-        dispatch(loadingMode(false));
+        }).catch((err) => {
+          dispatch(loadingMode(false));
         toast.error(err?.response.data?.message, {
           position: "top-right",
           autoClose: 5000,
@@ -74,7 +91,42 @@ const AddItem = () => {
           progress: undefined,
           theme: "colored",
         });
-      });
+        })
+
+    } else {
+      collectionService
+        .addItem(itemData, collectionId)
+        .then((res) => {
+          dispatch(loadingMode(false));
+          if (res.status === 200) {
+            toast.success(res?.data?.message, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            // 
+            navigate("/")
+          }
+          console.log(res);
+        })
+        .catch((err) => {
+          dispatch(loadingMode(false));
+          toast.error(err?.response.data?.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        });
+    }
   };
 
   useEffect(() => {
@@ -96,16 +148,16 @@ const AddItem = () => {
   
 
   return (
-    <div className="bg-gray-100 dark:bg-black">
+    <div className="bg-gray-100 dark:bg-black min-h-screen">
       <form className="p-6" action="POST">
         <div className="font-bold main-text-color xl:text-2xl md:text-xl py-4 dark:text-white">
         {t("add_item_title")}
         </div>
-        <div className="bg-white dark:bg-dark-mode-card flex gap-32 box-shadow-wrapper rounded p-6">
-          <div className="w-96">
+        <div className="bg-white dark:bg-dark-mode-card flex flex-col 2xl:flex-row md:flex-row sm:flex-col gap-32 box-shadow-wrapper rounded p-6">
+          <div className="w-full md:w-96">
             <ImageUploadInput image={imageShow} onChange={imageHandler} />
           </div>
-          <div className="flex flex-col gap-6 w-1/3">
+          <div className="flex flex-col gap-6 w-full md:w-1/3 sm:w-full">
             <Input
               type="text"
               label={t("home_card_title")}

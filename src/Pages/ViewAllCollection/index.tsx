@@ -26,10 +26,13 @@ const ViewAllCollections = () => {
 
   return (
     <div className="p-6">
-      <div className="text-black text-3xl font-semibold pb-3 dark:text-white">
+      <div className="flex items-center justify-between">
+      <div className="text-black text-2xl md:text-3xl font-semibold pb-3 dark:text-white">
         {t("view_all_collections_title")}
       </div>
-      <div className="grid grid-cols-4 gap-3">
+      <button type="button" className="inline-block px-6 py-2.5 bg-yellow-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-700 active:shadow-lg transition duration-150 ease-in-out">Download All Collections</button>
+        </div>
+      <div className="grid grid-cols-1 2xl:grid-cols-5 xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2  gap-3">
         {allCollections.map((item: any, i: number) => (
           <div
             key={i}

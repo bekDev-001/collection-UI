@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import {useNavigate} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import {useNavigate, useLocation} from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loadingMode } from "../../redux/reducers/loadingReducer";
 import ImageUploadInput from "../../Components/ImageUploadInput";
@@ -18,7 +18,24 @@ const AddCollection = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const {state} = useLocation();
   const { t } = useTranslation();
+
+  useEffect(() => {
+   if(state) {
+     collectionService.getOneCollectionId(state).then((res) => {
+          console.log(res);
+          setTitle(res.data.collections[0].title)
+          setTopic(res.data.collections[0].collectionTopic)
+          setDescripton(res.data.collections[0].description)
+          setImageShow(res.data.collections[0].collectionImage)
+          setImage(res.data.collections[0].collectionImage)
+        }).catch((err) => {
+          console.log(err);
+        })
+   }
+  }, [])
+  
 
   const imageHandler = (event: any) => {
     if (event.target.files["0"]) {
@@ -39,6 +56,37 @@ const AddCollection = () => {
     collectionData.append("collectionTopic", topic);
     collectionData.append("description", description);
     collectionData.append("collectionImage", image);
+    if(state) {
+        collectionService.editCollection(collectionData, state).then((res) => {
+        console.log(res);
+        dispatch(loadingMode(false));
+           if (res.status === 200) {
+          toast.success("Edit successfully!", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          // 
+          navigate("/")
+        }
+        }).catch((err) => {
+          dispatch(loadingMode(false));
+        toast.error(err?.response.data?.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+        })
+    } else {
     collectionService
       .addCollection(collectionData)
       .then((res) => {
@@ -60,7 +108,6 @@ const AddCollection = () => {
       })
       .catch((err) => {
         dispatch(loadingMode(false));
-
         toast.error(err?.response.data?.message, {
           position: "top-right",
           autoClose: 5000,
@@ -72,19 +119,21 @@ const AddCollection = () => {
           theme: "colored",
         });
       });
+    }
   };
+console.log(state);
 
   return (
-    <div className="bg-gray-100 dark:bg-black">
+    <div className="bg-gray-100 dark:bg-black min-h-screen">
       <form className="p-6" action="POST">
         <div className="font-bold main-text-color xl:text-2xl md:text-xl py-4 dark:text-white">
           {t("add_colletion_title")}
         </div>
-        <div className="bg-white dark:bg-dark-mode-card flex gap-32 box-shadow-wrapper rounded p-6">
-          <div className="w-96">
+        <div className="bg-white dark:bg-dark-mode-card flex flex-col 2xl:flex-row md:flex-row sm:flex-col gap-8 lg:gap-20 md:gap-10 box-shadow-wrapper rounded p-6">
+          <div className="w-full md:w-96">
             <ImageUploadInput image={imageShow} onChange={imageHandler} />
           </div>
-          <div className="flex flex-col gap-6 w-1/3">
+          <div className="flex flex-col gap-6 w-full md:w-1/3 sm:w-full">
             <Input
               type="text"
               label={t("home_card_title")}

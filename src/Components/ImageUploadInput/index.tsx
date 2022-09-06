@@ -14,16 +14,16 @@ const UploadImage = ({ onChange,  image }: Props) => {
   return (
     <div className="flex-col upload-image-container">
       {image ? (
-        <div className="custom-image-upload xl:h-80 flex justify-center items-center">
+        <div className="custom-image-upload xl:h-80 lg:h-64 md:h-64 flex justify-center items-center">
           <div className="background-part-image">
             <img src={image} alt="foo" />
           </div>
         </div>
       ) : (
-        <div className="custom-image-upload xl:h-80 flex justify-center items-center lg:h-52 md:h-40 dark:bg-slate-600">
+        <div className="custom-image-upload xl:h-80 flex justify-center items-center h-64 lg:h-64 md:h-64 dark:bg-slate-600">
           <label className="flex flex-col xl:gap-4 items-center my-auto w-full font-medium text-center xl:text-xl lg:text-xl lg:gap-2 md:gap-1 md:text-xl ">
             <svg
-              className="xl:w-14 lg:w-9 md:w-7"
+              className="xl:w-14 lg:w-9 md:w-7 w-7"
               viewBox="0 0 20 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
